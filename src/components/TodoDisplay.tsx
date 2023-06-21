@@ -33,7 +33,10 @@ const TodoDisplay = () => {
   return (
     <div className={styles.displayTodos}>
       <h1>
-        My todo list <button onClick={handleClear}>Clear</button>
+        My todo list{" "}
+        <button className={styles.delete} onClick={handleClear}>
+          Clear
+        </button>
       </h1>
       <ul>
         {todos.map((todo) => (
