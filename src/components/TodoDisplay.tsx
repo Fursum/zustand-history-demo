@@ -1,9 +1,9 @@
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
-import { FC, useEffect, useRef, useState } from "react";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Todo, useTodoStore } from "@/states/todos";
 import { useHistoryStore } from "@/states/history";
 import styles from "./style.module.scss";
-import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const TodoDisplay = () => {
   const { todos, clearTodos, addTodo } = useTodoStore();
