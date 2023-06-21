@@ -1,0 +1,118 @@
+.addTodoForm {
+  @apply bg-slate-400/25 
+  flex flex-col justify-center gap-2
+  max-w-sm m-2 p-4;
+
+  // Form title
+  > h1 {
+    @apply text-2xl font-bold;
+  }
+
+  .row {
+    @apply flex items-center justify-between;
+
+    > input {
+      @apply border border-gray-400 rounded 
+      py-2 px-4 
+      text-black;
+    }
+  }
+}
+
+.displayTodos {
+  @apply max-w-sm m-2 mt-4;
+
+  > h1 {
+    @apply relative pb-2
+    text-2xl font-bold 
+    flex justify-between items-center;
+
+    // Underline
+    &:after {
+      @apply absolute w-full bottom-0 mt-2 bg-slate-400/25;
+      height: 2px;
+      content: "";
+    }
+
+    // Clear button
+    > button {
+      @apply bg-red-700 font-bold text-sm py-2 px-4 rounded;
+    }
+  }
+
+  > ul {
+    @apply list-none flex flex-col gap-2 mt-2;
+  }
+
+  .row {
+    @apply flex items-center gap-4
+    p-4 bg-slate-400/25;
+
+    // Checkbox
+    > input {
+      @apply aspect-square rounded border border-gray-400;
+      min-width: 2rem;
+      min-height: 2rem;
+    }
+
+    .buttons {
+      @apply flex flex-col gap-2 ml-auto;
+    }
+
+    .text {
+      > h2 {
+        @apply text-xl font-bold break-all;
+      }
+      > p {
+        @apply opacity-80 text-sm break-all;
+      }
+    }
+  }
+}
+
+.editTodoForm {
+  @apply flex justify-between items-center gap-2;
+
+  .text {
+    @apply flex flex-col gap-2;
+
+    > input {
+      @apply border border-gray-400 rounded 
+      py-2 px-4 
+      text-black;
+    }
+  }
+
+  .buttons {
+    @apply ml-auto;
+  }
+}
+
+// Page wide buttons
+
+.edit {
+  @apply bg-blue-700/25 text-blue-400 border border-blue-400 
+  font-bold py-2 px-4 rounded;
+
+  &:hover {
+    @apply bg-blue-600/75 text-blue-200;
+  }
+}
+
+.delete {
+  @apply bg-red-700/25 text-red-400 border border-red-400 
+  font-bold py-2 px-4 rounded ml-auto;
+
+  &:hover {
+    @apply bg-red-600/75 text-red-200;
+  }
+}
+
+.reset {
+  @apply bg-gray-700/75 text-gray-400 border border-gray-400
+  font-bold py-2 px-4 rounded;
+
+  &:hover {
+    @apply bg-gray-600/75 text-gray-200;
+  }
+}
