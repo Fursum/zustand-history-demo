@@ -1,14 +1,17 @@
-import { FC, useState } from "react";
-import { Todo, useTodoStore } from "@/states/todos";
-import styles from "./style.module.scss";
 import { useForm } from "react-hook-form";
+import { FC, useEffect, useRef, useState } from "react";
+import { Todo, useTodoStore } from "@/states/todos";
 import { useHistoryStore } from "@/states/history";
+import styles from "./style.module.scss";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 const TodoDisplay = () => {
   const { todos, clearTodos, addTodo } = useTodoStore();
   const { addAction } = useHistoryStore();
 
   const [editingId, setEditingId] = useState<number | null>(null);
+
+  const [listRef] = useAutoAnimate({ easing: "ease-out", duration: 200 });
 
   const handleClear = () => {
     // To restore from history
@@ -38,7 +41,7 @@ const TodoDisplay = () => {
           Clear
         </button>
       </h1>
-      <ul>
+      <ul ref={listRef}>
         {todos.map((todo) => (
           <li key={todo.id} className={styles.row}>
             {editingId !== todo.id && (

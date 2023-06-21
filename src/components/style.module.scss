@@ -6,6 +6,13 @@
   // Form title
   > h1 {
     @apply text-2xl font-bold;
+
+    // Separator
+    &:after {
+      @apply block w-full bg-slate-400/25 my-2;
+      height: 2px;
+      content: "";
+    }
   }
 
   .row {
