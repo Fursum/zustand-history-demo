@@ -1,7 +1,7 @@
 .addTodoForm {
   @apply bg-slate-400/25 
   flex flex-col justify-center gap-2
-  max-w-sm m-2 p-4;
+  max-w-sm p-4;
 
   // Form title
   > h1 {
@@ -27,7 +27,7 @@
 }
 
 .displayTodos {
-  @apply max-w-sm m-2 mt-4;
+  @apply max-w-sm;
 
   > h1 {
     @apply relative pb-2
@@ -95,6 +95,86 @@
   }
 }
 
+.historyDisplay {
+  @apply flex flex-col gap-4
+  max-w-sm p-4
+  bg-slate-400/25;
+
+  > h1 {
+    @apply relative text-2xl font-bold;
+
+    // Separator
+    &:after {
+      @apply block w-full bg-slate-400/25 mt-2;
+      height: 2px;
+      content: "";
+    }
+  }
+
+  .buttons {
+    @apply flex gap-2;
+  }
+
+  > ul {
+    @apply list-none flex flex-col-reverse gap-2;
+    > li > button {
+      @apply relative flex items-center gap-8 
+      w-full p-4 rounded
+      bg-slate-400/25;
+
+      > h2 {
+        @apply text-xl font-bold break-all min-w-max;
+
+        // Side separator
+        &:after {
+          @apply absolute top-0 bottom-0 ml-4 bg-slate-400/25;
+          width: 2px;
+          content: "";
+        }
+      }
+
+      // 🤢 selectors
+      // Action description
+      > div {
+        @apply text-sm opacity-80;
+        > div {
+          @apply break-all text-left;
+        }
+      }
+
+      &:hover,
+      &:focus,
+      &:focus-within {
+        @apply outline outline-blue-400/50;
+      }
+
+      &.redoable {
+        @apply opacity-25;
+        &.target {
+          @apply opacity-100;
+        }
+      }
+
+      &.inQueue {
+        @apply bg-green-400/10 text-green-300;
+        &.redoable{
+          @apply opacity-75;
+        }
+      }
+
+      &.target {
+        @apply outline outline-green-400/50 bg-green-400/25 text-green-300;
+        opacity: 100% !important; 
+      }
+
+      &.invalid {
+        @apply outline outline-red-400/50 bg-red-400/25 text-red-300;
+        opacity: 100% !important;
+      }
+    }
+  }
+}
+
 // Page wide buttons
 
 .edit {
@@ -121,5 +201,14 @@
 
   &:hover {
     @apply bg-gray-600/75 text-gray-200;
+  }
+}
+
+.edit,
+.delete,
+.reset {
+  &:disabled {
+    opacity: 25%;
+    cursor: not-allowed;
   }
 }
