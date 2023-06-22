@@ -37,7 +37,11 @@ const TodoDisplay = () => {
     <div className={styles.displayTodos}>
       <h1>
         My todo list{" "}
-        <button className={styles.delete} onClick={handleClear}>
+        <button
+          className={styles.delete}
+          onClick={handleClear}
+          disabled={todos.length === 0}
+        >
           Clear
         </button>
       </h1>
@@ -92,11 +96,7 @@ const TodoCard: FC<{
 
   return (
     <>
-      <input
-        type="checkbox"
-        checked={todo.isDone}
-        onChange={handleCheck}
-      />
+      <input type="checkbox" checked={todo.isDone} onChange={handleCheck} />
       <div className={styles.text}>
         <h2>{todo.title}</h2>
         <p>{todo.content}</p>
