@@ -63,13 +63,39 @@ const TodoCard: FC<{
   todo: Todo;
   setEditingId: (id: number) => void;
 }> = ({ todo, setEditingId }) => {
-  const { deleteTodo, toggleTodo } = useTodoStore();
+  const { addTodo, deleteTodo, toggleTodo } = useTodoStore();
+  const { addAction } = useHistoryStore();
+
+  const handleDelete = () => {
+    deleteTodo(todo.id);
+    addAction({
+      description: {
+        title: "Delete",
+        content: `Removed: ${todo.title}`,
+      },
+      onUndo: () => addTodo(todo),
+      onRedo: () => deleteTodo(todo.id),
+    });
+  };
+
+  const handleCheck = () => {
+    toggleTodo(todo.id);
+    addAction({
+      description: {
+        title: "Toggle",
+        content: `Toggled: ${todo.title}`,
+      },
+      onUndo: () => toggleTodo(todo.id),
+      onRedo: () => toggleTodo(todo.id),
+    });
+  };
+
   return (
     <>
       <input
         type="checkbox"
         checked={todo.isDone}
-        onChange={() => toggleTodo(todo.id)}
+        onChange={handleCheck}
       />
       <div className={styles.text}>
         <h2>{todo.title}</h2>
@@ -79,7 +105,7 @@ const TodoCard: FC<{
         <button className={styles.edit} onClick={() => setEditingId(todo.id)}>
           Edit
         </button>
-        <button className={styles.delete} onClick={() => deleteTodo(todo.id)}>
+        <button className={styles.delete} onClick={handleDelete}>
           Delete
         </button>
       </div>
@@ -111,7 +137,7 @@ const EditTodo: FC<{
     addAction({
       description: {
         title: "Edit",
-        content: "Edited: " + data.title,
+        content: "Edited: " + todo.title,
       },
       onUndo: () => editTodo(todo),
       onRedo: () => editTodo({ ...todo, ...data }),
