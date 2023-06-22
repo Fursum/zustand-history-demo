@@ -16,7 +16,7 @@
   }
 
   .row {
-    @apply flex items-center justify-between;
+    @apply flex items-center justify-between gap-2;
 
     > input {
       @apply border border-gray-400 rounded 
