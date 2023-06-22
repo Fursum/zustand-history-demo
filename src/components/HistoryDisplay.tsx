@@ -13,24 +13,15 @@ const HistoryDisplay = () => {
 
   const [listRef] = useAutoAnimate({ easing: "ease-out", duration: 200 });
 
-  const undoQueue = useMemo(() => {
-    if (!selectedAction) return [];
-    return getUndoables(selectedAction.id);
-  }, [isLoading, selectedAction, getUndoables]); // eslint-disable-line react-hooks/exhaustive-deps
-  // isLoading is needed to update the queue
-
-  const redoQueue = useMemo(() => {
-    if (!selectedAction) return [];
-    return getRedoables(selectedAction.id);
-  }, [isLoading, selectedAction, getRedoables]); // eslint-disable-line react-hooks/exhaustive-deps
-  // isLoading is needed to update the queue
-
-  const isUndo = undoQueue.length > 0;
-  const isRedo = redoQueue.length > 0;
-
+  // Memoizing these may cause weird behavior when tracking action queue
+  const undoQueue = selectedAction ? getUndoables(selectedAction.id) : [];
+  const redoQueue = selectedAction ? getRedoables(selectedAction.id) : [];
   let actionQueue: ActionHistoryElement[] = [];
   if (undoQueue.length > 0) actionQueue = undoQueue;
   else actionQueue = redoQueue;
+
+  const isUndo = undoQueue.length > 0;
+  const isRedo = redoQueue.length > 0;
 
   const getHistoryElementClass = (action: ActionHistoryElement) => {
     let classNames = [];
